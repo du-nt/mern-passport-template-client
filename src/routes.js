@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 
@@ -21,26 +21,26 @@ export const routes = [
   {
     path: "/",
     exact: true,
-    component: () => <Home />,
+    component: Home,
   },
   {
     path: "/profile",
     protect: true,
-    component: () => <Profile />,
+    component: Profile,
   },
   {
     path: "/cart",
-    component: () => <Cart />,
+    component: Cart,
   },
   {
     path: "/notifications",
     protect: true,
-    component: () => <Notification />,
+    component: Notification,
   },
   {
     path: "/messages",
     protect: true,
-    component: () => <Message />,
+    component: Message,
   },
 ];
 
@@ -48,17 +48,17 @@ export const authRoutes = [
   {
     path: "/register",
     exact: true,
-    component: () => <Register />,
+    component: Register,
   },
   {
     path: "/login",
     exact: true,
-    component: () => <Login />,
+    component: Login,
   },
   {
     path: "/forgotpassword",
     exact: true,
-    component: () => <ForgotPassword />,
+    component: ForgotPassword,
   },
 ];
 
@@ -66,7 +66,7 @@ export const adminRoutes = [
   {
     path: "/admin",
     exact: true,
-    component: () => <Admin />,
+    component: Admin,
   },
 ];
 
@@ -119,7 +119,7 @@ export const GuardRoute = ({
 
 export const AuthRoute = ({ component: Component, ...rest }) => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const [goHomeIfLogged, setGoHomeIfLogged] = useState(true);
+  const [goHomeIfLogged, setGoHomeIfLogged] = React.useState(true);
 
   return (
     <Route
@@ -128,11 +128,7 @@ export const AuthRoute = ({ component: Component, ...rest }) => {
         isAuthenticated && goHomeIfLogged ? (
           <Redirect to="/" />
         ) : (
-          <Component
-            {...props}
-            bar="foo"
-            setGoHomeIfLogged={setGoHomeIfLogged}
-          />
+          <Component {...props} setGoHomeIfLogged={setGoHomeIfLogged} />
         )
       }
     />

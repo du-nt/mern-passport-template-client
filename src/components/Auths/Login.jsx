@@ -74,7 +74,7 @@ const helperTextStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Login(props) {
+export default function Login({ setGoHomeIfLogged }) {
   const [showPassword, setShowPassword] = useState(false);
 
   const history = useHistory();
@@ -104,9 +104,9 @@ export default function Login(props) {
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
-  console.log(props);
+
   const onSubmit = (data) => {
-    //     setGoHomeIfLogged(false);
+    setGoHomeIfLogged(false);
     const goBackPreviousPage = () => {
       reset();
       history.push(from);
