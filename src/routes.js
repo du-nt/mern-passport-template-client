@@ -14,6 +14,7 @@ import Message from "./components/Message";
 import Register from "./components/Auths/Register";
 import Login from "./components/Auths/Login";
 import ForgotPassword from "./components/Auths/ForgotPassword";
+import LinkAccountVerify from "./components/Auths/LinkAccountVerify";
 
 import Admin from "./components/Admin";
 
@@ -59,6 +60,10 @@ export const authRoutes = [
     path: "/forgotpassword",
     exact: true,
     component: ForgotPassword,
+  },
+  {
+    path: "/auth/:userId/verify",
+    component: LinkAccountVerify,
   },
 ];
 

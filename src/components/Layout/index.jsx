@@ -5,9 +5,9 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(0, 2),
-//     [theme.breakpoints.up("lg")]: {
-//       padding: 0,
-//     },
+    //     [theme.breakpoints.up("lg")]: {
+    //       padding: 0,
+    //     },
   },
 }));
 

@@ -42,13 +42,29 @@ export const register =
         variant: "success",
       });
     } catch (error) {
-      const data = error.response.data;
-      Object.keys(data).forEach((key) => {
-        setError(key, { message: data[key] });
-      });
+      const data = error?.response?.data;
+      if (data) {
+        Object.keys(data).forEach((key) => {
+          setError(key, { message: data[key] });
+        });
+      }
       enqueueSnackbar("Something wrong", {
         variant: "error",
       });
+    }
+  };
+
+export const linkAccount =
+  (values, userId, history, setError) => async (dispatch) => {
+    try {
+      const { data } = await postDataAPI(`/users/${userId}/verify`, values);
+      dispatch(setCurrentUser({ isAuthenticated: true, user: data }));
+      history.push("/");
+    } catch (error) {
+      const errorData = error?.response?.data;
+      if (errorData) {
+        setError("password", errorData);
+      }
     }
   };
 
@@ -63,10 +79,12 @@ export const login =
         variant: "success",
       });
     } catch (error) {
-      const errorData = error.response.data;
-      Object.keys(errorData).forEach((key) => {
-        setError(key, { message: errorData[key] });
-      });
+      const errorData = error?.response?.data;
+      if (errorData) {
+        Object.keys(errorData).forEach((key) => {
+          setError(key, { message: errorData[key] });
+        });
+      }
       enqueueSnackbar("Something wrong", {
         variant: "error",
       });
